@@ -1,5 +1,6 @@
 package br.com.alura.adopet.api.controller;
 
+import br.com.alura.adopet.api.dto.DadosDetalhesPet;
 import br.com.alura.adopet.api.model.Abrigo;
 import br.com.alura.adopet.api.model.Pet;
 import br.com.alura.adopet.api.repository.AbrigoRepository;
@@ -40,17 +41,19 @@ public class AbrigoController {
     }
 
     @GetMapping("/{idOuNome}/pets")
-    public ResponseEntity<List<Pet>> listarPets(@PathVariable String idOuNome) {
+    public ResponseEntity<List<DadosDetalhesPet>> listarPets(@PathVariable String idOuNome) {
         try {
             Long id = Long.parseLong(idOuNome);
             List<Pet> pets = repository.getReferenceById(id).getPets();
-            return ResponseEntity.ok(pets);
+            List<DadosDetalhesPet> detalhesPets = pets.stream().map(DadosDetalhesPet::new).toList();
+            return ResponseEntity.ok(detalhesPets);
         } catch (EntityNotFoundException enfe) {
             return ResponseEntity.notFound().build();
         } catch (NumberFormatException e) {
             try {
                 List<Pet> pets = repository.findByNome(idOuNome).getPets();
-                return ResponseEntity.ok(pets);
+                List<DadosDetalhesPet> detalhesPets = pets.stream().map(DadosDetalhesPet::new).toList();
+                return ResponseEntity.ok(detalhesPets);
             } catch (EntityNotFoundException enfe) {
                 return ResponseEntity.notFound().build();
             }
