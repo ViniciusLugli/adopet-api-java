@@ -19,7 +19,7 @@ public class AdocaoService {
     @Autowired
     private EmailService emailService;
 
-    public void solicitiar(Adocao adocao) {
+    public void solicitar(Adocao adocao) {
         if (adocao.getPet().getAdotado() == true) {
             throw new ValidacaoException("Pet já foi adotado!");
         } else {
