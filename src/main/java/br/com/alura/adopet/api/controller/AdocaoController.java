@@ -1,8 +1,8 @@
 package br.com.alura.adopet.api.controller;
 
-import br.com.alura.adopet.api.dto.AprovacaoAdocaoDto;
-import br.com.alura.adopet.api.dto.ReprovacaoAdocaoDto;
-import br.com.alura.adopet.api.dto.SolicitacaoAdocaoDto;
+import br.com.alura.adopet.api.dto.adocao.AprovacaoAdocaoDto;
+import br.com.alura.adopet.api.dto.adocao.ReprovacaoAdocaoDto;
+import br.com.alura.adopet.api.dto.adocao.SolicitacaoAdocaoDto;
 import br.com.alura.adopet.api.exception.ValidacaoException;
 import br.com.alura.adopet.api.service.AdocaoService;
 import jakarta.validation.Valid;

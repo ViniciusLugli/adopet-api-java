@@ -1,5 +1,8 @@
 package br.com.alura.adopet.api.service;
 
+import br.com.alura.adopet.api.dto.pet.CadastrarPetDto;
+import br.com.alura.adopet.api.dto.pet.DadosDetalhesPet;
+import br.com.alura.adopet.api.model.Abrigo;
 import br.com.alura.adopet.api.model.Pet;
 import br.com.alura.adopet.api.repository.PetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +15,14 @@ public class PetService {
     @Autowired
     private PetRepository repository;
 
-    public List<Pet> listarPetsDisponiveis() {
-        return repository.findByAdotadoIsFalse();
+    public List<DadosDetalhesPet> listarPetsDisponiveis() {
+        return repository.findByAdotadoIsFalse()
+                .stream()
+                .map(DadosDetalhesPet::new)
+                .toList();
+    }
+
+    public void cadastrarPet(Abrigo abrigo, CadastrarPetDto dto) {
+        repository.save(new Pet(dto, abrigo));
     }
 }
